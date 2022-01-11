@@ -1,0 +1,62 @@
+﻿@model Ecommerce.Web.ViewModels.UserOrderViewModel
+@{
+    ViewBag.Title = "MyOrderList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- wishlist main wrapper start -->
+<div class="wishlist-main-wrapper">
+    <div class="container">
+        <!-- Wishlist Page Content Start -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Wishlist Table Area -->
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="pro-title">ID</th>
+                                <th class="pro-price">Order Date</th>
+                                <th class="pro-quantity">Total Amount</th>
+                                <th class="pro-remove">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Orders != null)
+                            {
+                                foreach (var order in Model.Orders)
+                                {
+                                    //var commentedProducts = Model.Orders != null ? Model.Orders.FirstOrDefault(x => x.ID == order.RecordID) : null;
+
+                                    //var picURL = commentedProducts.ProductPictures != null && commentedProducts.ProductPictures.Count > 0 ?
+                                    //             "/Content/images/" + commentedProducts.ProductPictures.First().Picture.PictureURL :
+                                    //                "~/Content/theme/assets/img/product/product-img1.jpg";
+
+                            <tr>
+                                
+                                <td class="pro-price"><span> @order.ID</span></td>
+                                
+                                @*<td class="pro-title"><a href="@Url.Action("Details","Auctions",new { ID=comment.RecordID,category=commentedProducts.Category.CategoryName.ToLower(), productName=commentedProducts.ProductName.ToLower()})" target="_blank">@commentedProducts.ProductName</a></td>*@
+                                <td class="pro-price"><span>BDT @order.OrdereDate</span></td>
+                                <td class="pro-quantity"><span class="text-success">@order.TotalAmount</span></td>
+                                @*<td class="pro-subtotal"><a href="@Url.Action("DetailProduct","Product",new { ID=comment.RecordID})" class="sqr-btn text-white">Add to Cart</a></td>*@
+                                <td class="pro-remove"><a href="@Url.Action("OrderDetail","Shop",new { ID=order.ID,UserID=Session["ID"]})"><i class="fa fa-trash-o"></i>Order Details</a></td>
+                            </tr>
+                                }
+
+                            }
+                            else
+                            {
+                                <div class="alert alert-primary" role="alert">
+                                    No Comments Found
+                                </div>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Wishlist Page Content End -->
+    </div>
+</div>
+<!-- wishlist main wrapper end -->

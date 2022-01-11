@@ -1,0 +1,91 @@
+﻿ @model Ecommerce.Web.ViewModels.FilterProductViewModel
+    <!-- product main wrap start -->
+
+    <div class="shop-banner img-full">
+        <img src="~/Content/theme/assets/img/banner/banner_static1.jpg" alt="">
+    </div>
+    <!-- product view wrapper area start -->
+    <div class="shop-product-wrapper pt-34">
+        <!-- shop product top wrap start -->
+        <div class="shop-top-bar">
+            <div class="row">
+                <div class="col-lg-7 col-md-6">
+                    <div class="top-bar-left">
+                        <div class="product-view-mode mr-70 mr-sm-0">
+                            <a class="active" href="#" data-target="grid"><i class="fa fa-th"></i></a>
+                            <a href="#" data-target="list"><i class="fa fa-list"></i></a>
+                        </div>
+                        <div class="product-amount">
+                            <p>Showing All Product</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="top-bar-right">
+                        <div class="product-short">
+                            <p>Sort By : </p>
+                            <select class="nice-select" name="sortby">
+                                <option value="trending">Relevance</option>
+                                <option value="sales">Name (A - Z)</option>
+                                <option value="sales">Name (Z - A)</option>
+                                <option value="rating">Price (Low &gt; High)</option>
+                                <option value="date">Rating (Lowest)</option>
+                                <option value="price-asc">Model (A - Z)</option>
+                                <option value="price-asc">Model (Z - A)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- shop product top wrap start -->
+        <!-- product item start -->
+        <div class="shop-product-wrap grid row">
+            @foreach (var product in Model.Products)
+            {
+                var picURL = product.ProductPictures != null && product.ProductPictures.Count > 0 ?
+                            "/Content/images/" +
+                                product.ProductPictures.First().Picture.PictureURL :
+                                       "~/Content/theme/assets/img/product/product-img1.jpg";
+                var picURL2 = product.ProductPictures != null && product.ProductPictures.Count > 0 ?
+                            "/Content/images/" +
+                                product.ProductPictures.Last().Picture.PictureURL :
+                                       "~/Content/theme/assets/img/product/product-img1.jpg";
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <!-- product single grid item start -->
+                    <div class="product-item fix mb-30">
+                        <div class="product-thumb">
+                            <a href="@Url.Action("DetailProduct","Product",new { ID=product.ID})" name="ProductID" class="clickmevai" data-id="@product.ID">
+                                <img src="@picURL" class="img-pri" alt="">
+                                <img src="@picURL2" class="img-sec" alt="">
+                            </a>
+                            <div class="product-label">
+                                
+                            </div>
+                            <div class="product-action-link">
+                                <a href="@Url.Action("DetailProduct","Product",new { ID=product.ID})" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" data-placement="left" title="Quick view"><i class="fa fa-search"></i></span> </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i class="fa fa-refresh"></i></a>
+                                <button type="button" class="addtoCartCategoryWiseProduct" data-id="@product.ID" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="fa fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4><a href="@Url.Action("DetailProduct","Product",new { ID=product.ID})" name="ProductID" class="clickmevai" data-id="@product.ID">@product.ProductName</a></h4>
+                            <div class="pricebox">
+                                <span class="regular-price"><del>$@product.ProductSalePrice</del></span>
+                                <span class="regular-price">$@product.ProductSalePrice</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product single grid item end -->
+
+                </div> <!-- product single column end -->
+
+            }
+
+        </div>
+        <!-- product item end -->
+    </div>
+    <!-- product view wrapper area end -->
+

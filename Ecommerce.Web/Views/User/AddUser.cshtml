@@ -1,0 +1,126 @@
+﻿@model Ecommerce.Web.Models.User.CreateUserModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Form Validation</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Aero</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                        <li class="breadcrumb-item active">Form Validation</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <!-- Basic Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form id="AddUserForm" method="POST" action="@Url.Action("AddUser","User")">
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="First Name" name="FirstName" required>
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Last Name" name="LastName">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Phone Number" name="PhoneNumber">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Address" name="Address">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Email Address" name="EmailAddress">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Username" name="Username">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Password" name="Password">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Confirm Password" name="ConfirmPassword">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="GenderID">
+                                        <option>-- Please select Gender --</option>
+                                        @foreach (var item in Model.Genders)
+                                        {
+                                            <option value="@item.ID">@item.GenderName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <select class="form-control" name="ReligiousID">
+                                        <option>-- Please select Religious --</option>
+                                        @foreach (var item in Model.Religious)
+                                        {
+                                            <option value="@item.ID">@item.ReligiousName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <br />
+                                @*<div class="form-group">
+            <select class="form-control" name="UserTypeID">
+                <option>-- Please select UserType --</option>
+                @foreach (var item in Model.UserTypes)
+                {
+                    <option value="@item.ID">@item.RoleName</option>
+                }
+            </select>
+        </div>*@
+                                <div class="form-group">
+                                    <div class="radio inlineblock m-r-20">
+                                        <input type="radio" name="Status" id="male" class="with-gap" value="True">
+                                        <label for="male">Status</label>
+                                    </div>
+
+                                </div>
+                                <button id="UserAddBtn" class="btn btn-raised btn-primary waves-effect" type="button">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="imageTemplate" style="display:none">
+    <img class='image img-thumbnail' src='' style="height:100px; width:100px" />
+</div>
+<script>
+    $('#UserAddBtn').click(function () {
+        debugger;
+        var imageIDs = [];
+        $("#picturesArea .image").each(function () {
+            var imageID = $(this).attr("data-id");
+            imageIDs.push(imageID);
+        });
+        $("#PictureIDs").val(imageIDs.join())
+         $.ajax({
+         url: "@Url.Action("AddUser","User")",
+         type: "post",
+             data: $("#AddUserForm").serialize()
+     }).done(function (responses) {
+         debugger;
+         alert("User Save Succesfully");
+         window.location.href = "@Url.Action("Index", "User")";
+     }).fail(function () {
+
+     });
+    });
+</script>

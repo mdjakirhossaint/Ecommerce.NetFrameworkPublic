@@ -1,0 +1,275 @@
+﻿@model Ecommerce.Web.ViewModels.CartViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal totalBill = 0;
+    decimal discount = 0;
+}
+<br />
+<br />
+<br />
+@if (Model != null)
+{
+    if (Model != null && Model.CartProducts != null && Model.CartProducts.Count > 0)
+    {
+        <!-- cart main wrapper start -->
+      <div class="cart-main-wrapper">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <!-- Cart Table Area -->
+                      <div class="cart-table table-responsive">
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th class="pro-thumbnail">Thumbnail</th>
+                                      <th class="pro-title">Product</th>
+                                      <th class="pro-price">Price</th>
+                                      <th class="pro-quantity">Quantity</th>
+                                      <th class="pro-subtotal">Total</th>
+                                      <th class="pro-remove">Remove</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  @foreach (var product in Model.CartProducts)
+                                  {
+                                      var picURL = product.ProductPictures != null && product.ProductPictures.Count > 0 ?
+                                           "/Content/images/" +
+                                                product.ProductPictures.First().Picture.PictureURL :
+                                                       "~/Content/theme/assets/img/product/product-img1.jpg";
+
+                                      var proID = product.ID;
+
+                                      var productQuantity = Model.CartProductIDs.Where(productID => productID == product.ID).Count();
+                                      totalBill = totalBill + (productQuantity * product.ProductSalePrice);
+
+                                      <tr>
+                                          <td class="pro-thumbnail">
+                                              <a href="#">
+                                                  <img class="img-fluid" src="@picURL"
+                                                       alt="Product" />
+                                              </a>
+                                          </td>
+                                          <td class="pro-title"><a href="@Url.Action("DetailProduct","Product",new { ID=product.ID})">@product.ProductName</a></td>
+                                          <td class="pro-price"><span>$@product.ProductSalePrice</span></td>
+                                          <td class="pro-quantity">
+                                              <div @*class="pro-qty"*@><input id="quantityChange" style="border:none; text-align:center" readonly @*type="text"*@ value="@productQuantity"></div>
+                                          </td>
+                                          <td class="pro-subtotal"><span>$@(product.ProductSalePrice * productQuantity)</span></td>
+                                          <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                      </tr>
+                                  }
+
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <!-- Cart Update Option -->
+                      <div class="cart-update-option d-block d-md-flex justify-content-between">
+                          <div class="apply-coupon-wrapper">
+                              <form action="#" method="post" class=" d-block d-md-flex">
+                                  <input type="text" placeholder="Enter Your Coupon Code" required />
+                                  <button class="sqr-btn">Apply Coupon</button>
+                              </form>
+                          </div>
+                          <div class="cart-update mt-sm-16">
+                              <a href="@Url.Action("Index","Shop")" class="sqr-btn">Continue Shopping</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-lg-5 ml-auto">
+                      <!-- Cart Calculation Area -->
+                      <div class="cart-calculator-wrapper">
+                          <div class="cart-calculate-items">
+                              <h3>Cart Totals</h3>
+                              <div class="table-responsive">
+                                  <table class="table">
+                                      <tr>
+                                          <td>Total Purchase Amount</td>
+                                          <td>$@totalBill</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Discount</td>
+                                          <td>$@((totalBill*10)/100)</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Payable Amount</td>
+                                          <td>$@(totalBill-((totalBill*10)/100))</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Shipping</td>
+                                          <td>$70</td>
+                                      </tr>
+                                      <tr class="total">
+                                          <td>Total</td>
+                                          <td class="total-amount">$@((totalBill-((totalBill*10)/100))+70)</td>
+                                      </tr>
+                                  </table>
+                              </div>
+                          </div>
+                          <button id="plateOrderBtn" type="button" class="sqr-btn d-block">Place Order</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> <!-- cart main wrapper end -->
+    }
+    else
+    {
+        <p>You have no product yet</p>
+    }
+}
+<script>
+    $("#quantityChange").change(function () {
+        debugger;
+         $.ajax({
+            url: '@Url.Action("FilterBySlideProduct", "Shop")',
+            data: {
+                minimum: priceSlider.slider("values",0),
+                maximum: priceSlider.slider("values",1)
+            }
+        }).done(function (response) {
+            $("#PartialViewFilterProduct").html(response)
+        }).fail();
+
+    });
+</script>
+<script>
+    $("#plateOrderBtn").click(function () {
+        debugger;
+        $.ajax({
+            url: "@Url.Action("PlaceOrder","Shop")",
+            data: {
+                productIDs:'@string.Join("-",Model.CartProductIDs)'
+            }
+        }).done(function (response) {
+            debugger;
+            if (response.Success)
+            {
+                $.cookie('CartProducts','', { path: '/' });
+                updateCartProducts();
+                alert("Your Order Submitted! Othor Call You Later")
+                /*alert("Your Order has been Placed Successfully");*/
+                window.location = '@Url.Action("Index","Shop")';
+            }
+            else {
+                alert("Please Login then complete your checkout order");
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Please Login then complete your checkout order");
+        });
+    });
+
+
+    // for cookie
+    (function (factory) {
+        if (typeof define === 'function' && define.amd) {
+            // AMD (Register as an anonymous module)
+            define(['jquery'], factory);
+        } else if (typeof exports === 'object') {
+            // Node/CommonJS
+            module.exports = factory(require('jquery'));
+        } else {
+            // Browser globals
+            factory(jQuery);
+        }
+    }(function ($) {
+
+        var pluses = /\+/g;
+
+        function encode(s) {
+            return config.raw ? s : encodeURIComponent(s);
+        }
+
+        function decode(s) {
+            return config.raw ? s : decodeURIComponent(s);
+        }
+
+        function stringifyCookieValue(value) {
+            return encode(config.json ? JSON.stringify(value) : String(value));
+        }
+
+        function parseCookieValue(s) {
+            if (s.indexOf('"') === 0) {
+                // This is a quoted cookie as according to RFC2068, unescape...
+                s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+            }
+
+            try {
+                // Replace server-side written pluses with spaces.
+                // If we can't decode the cookie, ignore it, it's unusable.
+                // If we can't parse the cookie, ignore it, it's unusable.
+                s = decodeURIComponent(s.replace(pluses, ' '));
+                return config.json ? JSON.parse(s) : s;
+            } catch (e) { }
+        }
+
+        function read(s, converter) {
+            var value = config.raw ? s : parseCookieValue(s);
+            return $.isFunction(converter) ? converter(value) : value;
+        }
+
+        var config = $.cookie = function (key, value, options) {
+
+            // Write
+
+            if (arguments.length > 1 && !$.isFunction(value)) {
+                options = $.extend({}, config.defaults, options);
+
+                if (typeof options.expires === 'number') {
+                    var days = options.expires, t = options.expires = new Date();
+                    t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
+                }
+
+                return (document.cookie = [
+                    encode(key), '=', stringifyCookieValue(value),
+                    options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+                    options.path ? '; path=' + options.path : '',
+                    options.domain ? '; domain=' + options.domain : '',
+                    options.secure ? '; secure' : ''
+                ].join(''));
+            }
+
+            // Read
+
+            var result = key ? undefined : {},
+                // To prevent the for loop in the first place assign an empty array
+                // in case there are no cookies at all. Also prevents odd result when
+                // calling $.cookie().
+                cookies = document.cookie ? document.cookie.split('; ') : [],
+                i = 0,
+                l = cookies.length;
+
+            for (; i < l; i++) {
+                var parts = cookies[i].split('='),
+                    name = decode(parts.shift()),
+                    cookie = parts.join('=');
+
+                if (key === name) {
+                    // If second argument (value) is a function it's a converter...
+                    result = read(cookie, value);
+                    break;
+                }
+
+                // Prevent storing a cookie that we couldn't decode.
+                if (!key && (cookie = read(cookie)) !== undefined) {
+                    result[name] = cookie;
+                }
+            }
+
+            return result;
+        };
+
+        config.defaults = {};
+
+        $.removeCookie = function (key, options) {
+            // Must not alter options, thus extending a fresh object...
+            $.cookie(key, '', $.extend({}, options, { expires: -1 }));
+            return !$.cookie(key);
+        };
+
+    }));
+</script>

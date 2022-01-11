@@ -1,0 +1,12 @@
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\Ecommerce.Entities.dll.config
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\Ecommerce.Entities.dll
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\Ecommerce.Entities.pdb
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\EntityFramework.dll
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\EntityFramework.xml
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\obj\Debug\Ecommerce.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\obj\Debug\Ecommerce.Entities.csproj.CopyComplete
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\obj\Debug\Ecommerce.Entities.dll
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\obj\Debug\Ecommerce.Entities.pdb
+C:\Users\Zakir\source\repos\Ecommerce\Ecommerce.Entities\obj\Debug\Ecommerce.Entities.csproj.AssemblyReference.cache

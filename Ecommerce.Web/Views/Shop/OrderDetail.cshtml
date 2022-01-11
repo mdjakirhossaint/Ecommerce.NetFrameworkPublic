@@ -1,0 +1,69 @@
+﻿@model Ecommerce.Web.ViewModels.UserOrderViewModel
+
+    @{
+        ViewBag.Title = "OrderDetail";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <!-- wishlist main wrapper start -->
+    <div class="wishlist-main-wrapper">
+        <div class="container">
+            <!-- Wishlist Page Content Start -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Wishlist Table Area -->
+                    <div class="cart-table table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">Thumbnail</th>
+                                    <th class="pro-title">Order Date</th>
+                                    <th class="pro-price">Product Name</th>
+                                    <th class="pro-quantity">Product Price</th>
+                                    @*<th class="pro-remove">Details</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.OrderItems != null)
+                                {
+                                    foreach (var orderItem in Model.OrderItems)
+                                    {
+                                        //var commentedProducts = Model.Orders != null ? Model.Orders.FirstOrDefault(x => x.ID == order.RecordID) : null;
+
+                                        var picURL = orderItem.Product.ProductPictures != null && orderItem.Product.ProductPictures.Count > 0 ?
+                                                     "/Content/images/" + orderItem.Product.ProductPictures.First().Picture.PictureURL :
+                                                        "~/Content/theme/assets/img/product/product-img1.jpg";
+
+                                <tr>
+                                    <td class="pro-thumbnail">
+                                        <a href="#">
+                                            <img class="img-fluid" src="@picURL"
+                                                 alt="Product" />
+                                        </a>
+                                    </td>
+                                    <td class="pro-price"><span> @orderItem.Order.OrdereDate</span></td>
+
+                                    @*<td class="pro-title"><a href="@Url.Action("Details","Auctions",new { ID=comment.RecordID,category=commentedProducts.Category.CategoryName.ToLower(), productName=commentedProducts.ProductName.ToLower()})" target="_blank">@commentedProducts.ProductName</a></td>*@
+                                    <td class="pro-price"><span><a href="@Url.Action("DetailProduct","Product",new { ID=orderItem.ProductID})"> @orderItem.Product.ProductName</a></span></td>
+                                    <td class="pro-quantity"><span class="text-success">@orderItem.Product.ProductSalePrice</span></td>
+                                    @*<td class="pro-subtotal"><a href="@Url.Action("DetailProduct","Product",new { ID=comment.RecordID})" class="sqr-btn text-white">Add to Cart</a></td>*@
+
+                                </tr>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="alert alert-primary" role="alert">
+                                        No Comments Found
+                                    </div>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Wishlist Page Content End -->
+        </div>
+    </div>
+    <!-- wishlist main wrapper end -->

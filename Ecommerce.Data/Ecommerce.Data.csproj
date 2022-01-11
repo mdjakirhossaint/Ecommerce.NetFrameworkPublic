@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9E40AA5-369A-4665-AFE4-EF995325E98F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ecommerce.Data</RootNamespace>
+    <AssemblyName>Ecommerce.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EcommerceContext.cs" />
+    <Compile Include="Migrations\202111250453447__NewDatabaseCreate.cs" />
+    <Compile Include="Migrations\202111250453447__NewDatabaseCreate.Designer.cs">
+      <DependentUpon>202111250453447__NewDatabaseCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111261413110__AdsTableAdded.cs" />
+    <Compile Include="Migrations\202111261413110__AdsTableAdded.Designer.cs">
+      <DependentUpon>202111261413110__AdsTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111261921108__useerPictureAdded.cs" />
+    <Compile Include="Migrations\202111261921108__useerPictureAdded.Designer.cs">
+      <DependentUpon>202111261921108__useerPictureAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111271411417__blogTableAdd.cs" />
+    <Compile Include="Migrations\202111271411417__blogTableAdd.Designer.cs">
+      <DependentUpon>202111271411417__blogTableAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111301316324__OrderandOrderItemTableAdd.cs" />
+    <Compile Include="Migrations\202111301316324__OrderandOrderItemTableAdd.Designer.cs">
+      <DependentUpon>202111301316324__OrderandOrderItemTableAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112011316435__UpdateTableCommentandOrder.cs" />
+    <Compile Include="Migrations\202112011316435__UpdateTableCommentandOrder.Designer.cs">
+      <DependentUpon>202112011316435__UpdateTableCommentandOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112011334426__UpdateCommentTable.cs" />
+    <Compile Include="Migrations\202112011334426__UpdateCommentTable.Designer.cs">
+      <DependentUpon>202112011334426__UpdateCommentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112011421108__UpdateCommentTable2.cs" />
+    <Compile Include="Migrations\202112011421108__UpdateCommentTable2.Designer.cs">
+      <DependentUpon>202112011421108__UpdateCommentTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112011422454__UpdateCommentTable3.cs" />
+    <Compile Include="Migrations\202112011422454__UpdateCommentTable3.Designer.cs">
+      <DependentUpon>202112011422454__UpdateCommentTable3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112011430107__UpdateCommentTable4.cs" />
+    <Compile Include="Migrations\202112011430107__UpdateCommentTable4.Designer.cs">
+      <DependentUpon>202112011430107__UpdateCommentTable4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112050803074__MostViewTableAdded.cs" />
+    <Compile Include="Migrations\202112050803074__MostViewTableAdded.Designer.cs">
+      <DependentUpon>202112050803074__MostViewTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112051557595__UserTableUpdate.cs" />
+    <Compile Include="Migrations\202112051557595__UserTableUpdate.Designer.cs">
+      <DependentUpon>202112051557595__UserTableUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112051810020__UserTableUpdated.cs" />
+    <Compile Include="Migrations\202112051810020__UserTableUpdated.Designer.cs">
+      <DependentUpon>202112051810020__UserTableUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112060436518__UserTableModification.cs" />
+    <Compile Include="Migrations\202112060436518__UserTableModification.Designer.cs">
+      <DependentUpon>202112060436518__UserTableModification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112060751315__commentTableUpdate.cs" />
+    <Compile Include="Migrations\202112060751315__commentTableUpdate.Designer.cs">
+      <DependentUpon>202112060751315__commentTableUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112061110363__wishListTableAdd.cs" />
+    <Compile Include="Migrations\202112061110363__wishListTableAdd.Designer.cs">
+      <DependentUpon>202112061110363__wishListTableAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112071731180__OrderDetailTableUpdate.cs" />
+    <Compile Include="Migrations\202112071731180__OrderDetailTableUpdate.Designer.cs">
+      <DependentUpon>202112071731180__OrderDetailTableUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112080751551__VendorTableAdded.cs" />
+    <Compile Include="Migrations\202112080751551__VendorTableAdded.Designer.cs">
+      <DependentUpon>202112080751551__VendorTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112271522111__adderCurrentBalanceTable.cs" />
+    <Compile Include="Migrations\202112271522111__adderCurrentBalanceTable.Designer.cs">
+      <DependentUpon>202112271522111__adderCurrentBalanceTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112271848073__OrderTableEdited.cs" />
+    <Compile Include="Migrations\202112271848073__OrderTableEdited.Designer.cs">
+      <DependentUpon>202112271848073__OrderTableEdited.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112301752106__checkoutTableAdded.cs" />
+    <Compile Include="Migrations\202112301752106__checkoutTableAdded.Designer.cs">
+      <DependentUpon>202112301752106__checkoutTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ecommerce.Entities\Ecommerce.Entities.csproj">
+      <Project>{DFF5B172-2311-48AD-9D67-EA13091C56B3}</Project>
+      <Name>Ecommerce.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202111250453447__NewDatabaseCreate.resx">
+      <DependentUpon>202111250453447__NewDatabaseCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111261413110__AdsTableAdded.resx">
+      <DependentUpon>202111261413110__AdsTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111261921108__useerPictureAdded.resx">
+      <DependentUpon>202111261921108__useerPictureAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111271411417__blogTableAdd.resx">
+      <DependentUpon>202111271411417__blogTableAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111301316324__OrderandOrderItemTableAdd.resx">
+      <DependentUpon>202111301316324__OrderandOrderItemTableAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112011316435__UpdateTableCommentandOrder.resx">
+      <DependentUpon>202112011316435__UpdateTableCommentandOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112011334426__UpdateCommentTable.resx">
+      <DependentUpon>202112011334426__UpdateCommentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112011421108__UpdateCommentTable2.resx">
+      <DependentUpon>202112011421108__UpdateCommentTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112011422454__UpdateCommentTable3.resx">
+      <DependentUpon>202112011422454__UpdateCommentTable3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112011430107__UpdateCommentTable4.resx">
+      <DependentUpon>202112011430107__UpdateCommentTable4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112050803074__MostViewTableAdded.resx">
+      <DependentUpon>202112050803074__MostViewTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112051557595__UserTableUpdate.resx">
+      <DependentUpon>202112051557595__UserTableUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112051810020__UserTableUpdated.resx">
+      <DependentUpon>202112051810020__UserTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112060436518__UserTableModification.resx">
+      <DependentUpon>202112060436518__UserTableModification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112060751315__commentTableUpdate.resx">
+      <DependentUpon>202112060751315__commentTableUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112061110363__wishListTableAdd.resx">
+      <DependentUpon>202112061110363__wishListTableAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112071731180__OrderDetailTableUpdate.resx">
+      <DependentUpon>202112071731180__OrderDetailTableUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112080751551__VendorTableAdded.resx">
+      <DependentUpon>202112080751551__VendorTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112271522111__adderCurrentBalanceTable.resx">
+      <DependentUpon>202112271522111__adderCurrentBalanceTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112271848073__OrderTableEdited.resx">
+      <DependentUpon>202112271848073__OrderTableEdited.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112301752106__checkoutTableAdded.resx">
+      <DependentUpon>202112301752106__checkoutTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Form Validation</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Aero</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                        <li class="breadcrumb-item active">Form Validation</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <!-- Basic Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form id="form_validation" method="POST" action="@Url.Action("AddProduct","Product")">
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Product Name" name="ProductName" required>
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="ProductSalePrice" name="ProductSalePrice">
+                                </div>
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="ProductRegularPrice" name="ProductRegularPrice">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="CategoryID">
+                                        <option>-- Please select Category --</option>
+                                        @foreach (var item in ViewBag.category)
+                                        {
+                                            <option value="@item.ID">@item.CategoryName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <select class="form-control" name="BrandID">
+                                        <option>-- Please select Brand --</option>
+                                        @foreach (var item in ViewBag.brand)
+                                        {
+                                            <option value="@item.ID">@item.BrandName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="ManufacturerID">
+                                        <option>-- Please select Brand --</option>
+                                        @foreach (var item in ViewBag.manufacture)
+                                        {
+                                            <option value="@item.ID">@item.ManufacturerName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <br />
+                                <div class="form-group form-float">
+                                    <input type="text" class="form-control" placeholder="Product Code" name="ProductCode">
+                                </div>
+
+                                <div class="form-group form-float">
+                                    <textarea rows="10" class="form-control" placeholder="Product Short Description" name="ProductShortDescription"></textarea>
+                                </div>
+
+                                <div class="form-group form-float">
+                                    <textarea rows="10" class="form-control" placeholder="Product Full Description" name="ProductDescription"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Select Image</label>
+                                    <input class="form-control" name="ProductPictures" id="productPictures" type="file" multiple />
+                                    <div id="picturesArea" class="form-group"></div>
+                                    <input type="hidden" name="ProductPictures" id="PictureIDs" />
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="radio inlineblock m-r-20">
+                                        <input type="radio" name="IsFeatured" id="male" class="with-gap" value="True">
+                                        <label for="male">Is Featured</label>
+                                    </div>
+                                    <div class="radio inlineblock">
+                                        <input type="radio" name="Status" id="Female" class="with-gap" value="True">
+                                        <label for="Female">Status</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="checkbox" name="IsSlider" id="" class="with-gap" value="True">
+                                        <label for="">Set Slider?</label>
+                                    </div>
+                                    <div class="">
+                                        <input type="checkbox" name="IsLatestcAds" id="" class="with-gap" value="True">
+                                        <label for="">Set Latest Ads?</label>
+                                    </div>
+                                    <div class="check-mark">
+                                        <input type="checkbox" name="IsStaticAds" id="" class="with-gap" value="True">
+                                        <label for="">Set Ads ? </label>
+                                    </div>
+                                    <div class="">
+                                        <input type="checkbox" name="IsFlashSale" id="" class="with-gap" value="True">
+                                        <label for="">Set FlashSale ? </label>
+                                    </div>
+                                </div>
+                                <button id="ProductAddBtn" class="btn btn-raised btn-primary waves-effect" type="button">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="imageTemplate" style="display:none">
+    <img class='image img-thumbnail' src='' style="height:100px; width:100px" />
+</div>
+<script>
+    $('#ProductAddBtn').click(function () {
+        debugger;
+        var imageIDs = [];
+        $("#picturesArea .image").each(function () {
+            var imageID = $(this).attr("data-id");
+            imageIDs.push(imageID);
+        });
+        $("#PictureIDs").val(imageIDs.join())
+         $.ajax({
+         url: "@Url.Action("AddProduct","Product")",
+         type: "post",
+             data: $("#form_validation").serialize()
+         }).done(function (responses) {
+             debugger;
+             alert("Product Save Succesfully");
+             window.location.href = "@Url.Action("Index", "Product")";
+         }).fail(function () {
+
+         });
+    });
+
+    $("#productPictures").change(function () {
+          debugger;
+          var pictures = this.files;
+          var picsData = new FormData();
+        for (var i = 0; i < pictures.length; i++) {
+            picsData.append("Picture", pictures[i]);
+        }
+        $.ajax({
+            url: "@Url.Action("UploadPictures","Shared")",
+            type: "post",
+            data: picsData,
+            datatype: "json",
+            processData: false,
+            contentType: false
+        }).done(function (responses) {
+            debugger;
+            for (var i = 0; i < responses.length; i++) {
+                var picResponse = responses[i];
+
+                AttachNewImage(picResponse.pictureUrl, picResponse.ID);
+            }
+        }).fail(function () { });
+    });
+
+    function AttachNewImage(imageURL, imageID) {
+        debugger;
+
+        var $newImageHTML = $("#imageTemplate").clone();
+
+        $newImageHTML.find(".image").attr("src", "/Content/images/" + imageURL);
+        $newImageHTML.find(".image").attr("data-id", imageID);
+
+        $("#picturesArea").append($newImageHTML.html());
+
+        RemoveImageOnClick();
+
+    }
+
+    function RemoveImageOnClick() {
+        $("#picturesArea .image").click(function () {
+
+            debugger;
+            $(this).remove();
+
+        });
+    }
+</script>
